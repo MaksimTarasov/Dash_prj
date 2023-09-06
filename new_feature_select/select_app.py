@@ -32,7 +32,11 @@ app.layout = html.Div([
                         dcc.Dropdown(
                             id='color_dropdown',
                             options=[{'label': user, 'value': user} for user in user_list]),
-                        html.Div(id='color_output',)
+                            html.Div(id='color_output',children=""),
+                            html.Div([
+                                html.P(id='p1_in_div', children="Hello comrade")
+                            ], id='color_output2'),
+
 ])
 """
 Input - указывается элемент который будет служить вводом для 
@@ -42,7 +46,8 @@ Input - указывается элемент который будет служ
 Output - указывается элемент который будет изменяться
         Output(component_id='color_output', component_property='children')    
 """
-@app.callback(Output('color_output', 'children'),
+@app.callback(#Output('color_output', 'children'),
+                     Output('p1_in_div', 'children'),
                      Input('color_dropdown', 'value'))
 def display_selected_color(user):
     """
