@@ -30,13 +30,14 @@ user_list = drop_down_list(data_rangs)
 app = dash.Dash(__name__)
 app.layout = html.Div([
                         dcc.Dropdown(
-                            id='color_dropdown',
+                            id='user_dropdown',
                             options=[{'label': user, 'value': user} for user in user_list]),
-                            html.Div(id='color_output',children=""),
-                            html.Div([
-                                html.P(id='p1_in_div', children="Hello comrade")
-                            ], id='color_output2'),
-
+                        html.Div([
+                                html.P(id='p_out_1', children="Участник")
+                            ]),
+                        html.Div([
+                                html.P(id='p_out_2', children="Сектор")
+                            ]),
 ])
 """
 Input - указывается элемент который будет служить вводом для 
@@ -46,9 +47,9 @@ Input - указывается элемент который будет служ
 Output - указывается элемент который будет изменяться
         Output(component_id='color_output', component_property='children')    
 """
-@app.callback(#Output('color_output', 'children'),
-                     Output('p1_in_div', 'children'),
-                     Input('color_dropdown', 'value'))
+@app.callback(Output('p_out_1', 'children'),
+                     Output('p_out_2', 'children'),
+                     Input('user_dropdown', 'value'))
 def display_selected_color(user):
     """
 
@@ -58,11 +59,10 @@ def display_selected_color(user):
     if user is None:
         user = 'nothing'
     answer = data_rangs[data_rangs["Unnamed: 2"]==user]
-    return [html.H3('You selected '), f'{answer.values[0][2]}',
-                                      f'{answer.values[0][3]}',
-                                      f'{answer.values[0][5]}'
-
-            ]
+    username = [html.H3('You selected '), f'{answer.values[0][2]} {answer.values[0][3]}']
+    skill = f'сектор: {answer.values[0][5]}'
+    #Функция возвращаяет значения кортежем, по порядку указаннаму в декораторе.  username -> Output1, skill -> Output2
+    return username, skill
 
 if __name__ == '__main__':
     app.run_server()
