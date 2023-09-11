@@ -1,38 +1,33 @@
 from typing import List
 from dash import Dash, html, dcc
 
-# left_panel_div = {
-#     'position': 'absolute',
-#     'background-color': 'green',
-#     'width': '50%',
-#     'height': '50%',
-#     'left': '0px',
-#     'top': '0px'
-# }
-# right_panel_div = {
-#     'position': 'absolute',
-#     'background-color': 'blue',
-#     'width': '50%',
-#     'height': '50%',
-#     'left': '50%',
-#     'top': '0px'
-# }
-# inner_div = {
-#     'position': 'relative',
-#     'background-color': 'gray',
-#     'width': '50%',
-#     'height': '50%',
-# }
 external_stylesheets = ['assets/style.css']
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 app.layout = html.Div(children=[
     html.Div(id='left_panel_div', children=[
-        html.Div(id='left_top_div', children=[html.P('left DIV')]),
-        html.Div(id='left_bottom_div', children=[html.P('right DIV')]),
+        html.Div(id='left_top_div', children=[
+            html.P('top left DIV'),
+            html.Label('dcc.Dropdown'),
+            dcc.Dropdown(['New York City', 'Montréal', 'San Francisco'], 'Montréal'),
+            html.Label('dcc.RadioItem'),
+            dcc.RadioItems(['New York City', 'Montréal', 'San Francisco'], 'Montréal'),
+            html.Label('dcc.CheckList'),
+            dcc.Checklist(['1', '2', '3']),
+            dcc.Clipboard(),
+            html.Label('dcc.Slider'),
+            dcc.Slider(
+                min=0,
+                max=10,
+                marks={i: f'Label {i}' if i == 1 else str(i) for i in range(1, 10)},
+                value=5,
+            ),
+
+        ]),
+        html.Div(id='left_bottom_div', children=[html.P('bottom left DIV')]),
     ]),
     html.Div(id='right_panel_div', children=[
-      html.Div(id='right_top_div', children=[html.P('left DIV')]),
-      html.Div(id='right_bottom_div', children=[html.P('right DIV')]),
+      html.Div(id='right_top_div', children=[html.P('top right DIV')]),
+      html.Div(id='right_bottom_div', children=[html.P('bottom right DIV')]),
   ])
 ], )
 
