@@ -1,0 +1,22 @@
+#left_panel_div  {
+    position: absolute;
+    background-color: green;
+    width: 50%;
+    height: 50%;
+    left: 0px;
+    top: 0px
+}
+#right_panel_div  {
+    position: absolute;
+    background-color: blue;
+    width: 50%;
+    height: 50%;
+    left: 50%;
+    top: 0px
+}
+#left_top_div, #left_bottom_div, #right_top_div, #right_bottom_div {
+    position: relative;
+    background-color: gray;
+    width: 50%;
+    height: 50%;
+}
